@@ -3982,675 +3982,291 @@ When using team synchronization, observe these limits:
 - Max teams per organization: **1,500**
 
 Exceeding these may result in performance issues or sync failures.
-
-## GitHub administration for enterprise support and adoption
+## Manage repository changes by using pull requests on GitHub
 ### Introduction
 
+Change is inevitable, especially in software repositories. Project improvements often require the coordination of many people working together in parallel to produce the right output. Responsibly tracking and merging those changes is a complex and substantial challenge.
 
-![A graphic that superimposes 'GitHub Administration for Enterprise support and adoption' over a stylized world map, upon which stylized keys appear](https://learn.microsoft.com/en-gb/training/github/github-administration-for-enterprise-support-adoption/media/intro-01.png)
+Fortunately, pull requests offer the right balance of control and convenience. Whether you're interested in making changes, reviewing changes, or understanding the effect of changes across the repository, pull requests are the way GitHub users collaborate on code.
 
-As your organization's GitHub administrator, one of your responsibilities is to take advantage of the tools GitHub provides to both businesses large and small. GitHub Enterprise creates a custom environment where you can package software development tools and features together to improve the daily operations within your organization.
+### What are pull requests?
 
-Suppose your organization lands a major software development contract. It needs to expand its workforce and capabilities right away. However, with greater headcount comes more authentication and more code that requires review for critical errors and vulnerabilities. Your organization's leaders decide that GitHub's Enterprise package provides the necessary enhanced service. As an administrator, you need to assist with the setup of the Enterprise automation and upkeep tools.
+#### Branches
 
-### GitHub Enterprise features
+First, let’s define what branches are, why they’re important to developers, and how they’re related to pull requests.
 
-As a GitHub Enterprise administrator, you're responsible for establishing development environments that are both secure and scalable. This unit explores how to distinguish between GitHub Enterprise’s _upkeep_ and _automation_ features, and how to configure your organization for efficient collaboration.
+Branches are isolated workspaces where you can develop your work without affecting others in the repository. They allow you to develop features, fix bugs, and safely experiment with new ideas in a contained area of your repository.
 
-We also introduce standards-based developer workflows and rulesets—powerful tools for centralized policy enforcement.
+Developers working on independent branches is a common concept in modern software development. By having their own branch, a developer can make any changes, called _commits_, without worrying about how their commits affect other developers working on their own branches.
 
-#### GitHub Enterprise: Upkeep vs. Automation
+##### Merging branches
 
-GitHub Enterprise includes all features from GitHub Team, plus enterprise-specific capabilities categorized as:
+Although having each developer work on a separate branch is great for individual productivity, it opens a new challenge. At some point, each developer's branch needs to be _merged_ into a common branch, like `main`. As projects scale, there can be many merges that need to happen, and it becomes increasingly important to track and review each merge. Needing to keep track of multiple changes to a project is where pull requests come in.
 
-- **Upkeep**: Features that improve security, access, and support.
-- **Automation**: Features that reduce manual workload for developers and improve code quality at scale.
+#### What is a pull request?
 
-##### Practical Example
+A pull request is a way to document branch changes and communicate that the changes from the developer’s branch are ready to be _merged_ into the base (main) branch. Pull requests enable stakeholders to review and discuss the proposed changes to ensure that the code quality in the base branch is kept as high as possible.
 
-Imagine your organization has brought in an external contractor team to deliver a new product feature. As an administrator, your responsibilities might include:
+In order for the two branches to be merged, they must be different from one another:
 
-- Enabling private GitHub Pages for controlled documentation sharing (an upkeep feature).
-- Monitoring GitHub Actions usage to ensure efficient automation across the expanding team (an automation feature).
+- The _compare_ branch is the developer’s own branch, which contains the specific changes they made.
+- The _base_ branch, also referred to as the _main_ branch, is the branch that the changes need to be merged into.
 
-![Diagram of GitHub Enterprise features categories split between Upkeep and Automation.](https://learn.microsoft.com/en-gb/training/github/github-administration-for-enterprise-support-adoption/media/enterprise-features-dichotomy.png)
+The most common use of _compare_ is to compare branches, such as when you're starting a new pull request. You're always taken to the branch comparison view when starting a new pull request.
 
-#### Establishing Developer Workflow Standards
+#### Create a pull request
 
-To ensure consistency, security, and scalability, GitHub Enterprise organizations should follow these workflow standards:
+Now let’s review how to create a pull request!
 
-##### 1. Collaboration Models
+1. On `GitHub.com`, navigate to the main page of the repository.
+    
+2. In the **Branch** menu, select the branch that contains your commits.
+    
+    ![Screenshot of creating a new branch and naming it.](https://learn.microsoft.com/en-us/training/github/manage-changes-pull-requests-github/media/2-new-branch-name-text-box.png)
+    
+3. Above the list of files, in the yellow banner, select the **Compare & pull request** button to create a pull request for the associated branch.
+    
+    ![Screenshot of a yellow text box, highlighting the green compare and pull request button.](https://learn.microsoft.com/en-us/training/github/manage-changes-pull-requests-github/media/2-compare-and-pull-request.png)
+    
+4. In the **base branch** dropdown menu, select the branch you'd like to merge your changes into. Then select the **compare branch** dropdown menu to select the branch you made your changes in.
+    
+5. Enter a title and description for your pull request.
+    
+6. To create a pull request that’s ready for review, select the **Create Pull Request** button. To create a draft pull request, select the dropdown and select **Create Draft Pull Request**, then select **Draft Pull Request**.
+    
 
-|Workflow|When to Use|
-|---|---|
-|**Fork-and-Pull**|Open source or cross-organization collaboration.|
-|**Branching**|Internal team development within shared repositories.|
+#### Pull request statuses
 
-##### 2. Branching Conventions
+Now let’s review the different statuses of a pull request.
 
-- Adopt a consistent naming scheme (e.g., `feature/*`, `bugfix/*`).
-- Use `main` or `develop` as stable integration branches for CI/CD pipelines.
+- **Draft pull request** - When you create a pull request, you can choose to either create a pull request that’s ready for review or a _draft_ pull request. A pull request with a draft status can’t be merged, and code owners aren’t automatically requested to review draft pull requests.
+    
+- **Open pull request** - An open status means the pull request is active and not yet merged to the base branch. You can still make commits and discuss and review potential changes with collaborators.
+    
+- **Closed pull request** - You can choose to close a pull request without merging it into the base/main branch. This option can be handy if the changes proposed in the branch are no longer needed, or if another solution is proposed in another branch.
+    
+- **Merged pull request** - The merged pull request status means that the updates and commits from the compare branch were combined with the base branch. Anyone with push access to the repository can complete the merge.
+    
 
-#### 3. Rulesets: Modern Policy Enforcement
+#### Merge a pull request
 
-**Rulesets** are GitHub's recommended mechanism for enforcing policy at scale. Unlike traditional branch protection rules, rulesets allow you to centrally manage policies across multiple repositories and teams.
+1. Under your repository name, select **Pull requests**.
+    
+    ![Screenshot of the top navigation bar of a repo with the Pull request tab highlighted.](https://learn.microsoft.com/en-us/training/github/manage-changes-pull-requests-github/media/3-pull-request-tab.png)
+    
+2. In the **Pull requests** list, select the pull request you'd like to merge.
+    
+3. Scroll down to the bottom of the pull request. Depending on the merge options enabled for your repository, you can:
+    
+    - Merge all of the commits into the base branch by selecting the **Merge pull request** button. If the **Merge pull request** option isn’t shown, select the merge dropdown menu, choose the **Create a merge commit** option, and then select the **Create a merge commit** button.
+        
+        ![Screenshot of the dropdown menu of the green merge pull request button with the Create a merge commit selected.](https://learn.microsoft.com/en-us/training/github/manage-changes-pull-requests-github/media/3-merge-pull-request.png)
+        
+    - **Squash and merge** allows you to take all of your commits and combine them into one. This option can help you keep your repository history more readable and organized. Select the **Squash and merge** option, and then select the **Squash and merge** button.
+        
+    - The **Rebase and merge** option allows you to make commits without a merge commit. This option enables you to skip a merge by maintaining a linear project history. Select the merge dropdown menu, then choose the **Rebase and merge** option, and then select the **Rebase and merge** button.
+        
+4. If prompted, enter a commit message, or accept the default message.
+    
+5. If you have more than one email address associated with your account on `GitHub.com`, select the email address dropdown menu and select the email address to use as the Git author email address. Only verified email addresses appear in this dropdown menu. If you enabled email address privacy, then a no-reply GitHub email is the default commit author email address.
+    
+    ![Screenshot of a commit change with a description box and the drop-down menu of the email to select as the author of the commit.](https://learn.microsoft.com/en-us/training/github/manage-changes-pull-requests-github/media/3-select-author-of-merge.png)
+    
+6. Select **Confirm merge**, **Confirm squash and merge**, or **Confirm rebase and merge**.
+    
+7. Optionally, you can delete the compare branch to keep the list of branches in your repository tidy.
 
-![Screenshot of Rulesets overview.](https://learn.microsoft.com/en-gb/training/github/github-administration-for-enterprise-support-adoption/media/ruleset-primary-focus.png)
 
-##### Benefits of Rulesets
+## Search and organize repository history by using GitHub
 
-- **Centralized control** over repository policies.
-- **Consistency** in enforcement across teams.
-- **Scalability** for growing organizations.
-- **Granular flexibility** through layered combinations.
-
-##### Example Policies
-
-- Require pull request reviews.
-- Enforce CI/CD checks before merge.
-- Restrict access to protected branches.
-
-![Screenshot of the ruleset enforcement dashboard.](https://learn.microsoft.com/en-gb/training/github/github-administration-for-enterprise-support-adoption/media/example-ruleset-policies.png)
-
-###### Combining Rulesets and Branch Protection (Legacy Support)
-
-- Use rulesets as the **primary mechanism**.
-- Layer branch protection rules for **repository-specific exceptions**.
-- Avoid overlap between both to reduce policy conflicts.
-
-#### Upkeep Features: Supporting Secure Access and Operations
-
-Upkeep features reduce friction in user experience, ensure secure access control, and support hybrid-cloud environments.
-
-##### Key Upkeep Features
-
-|Feature|Description|
-|---|---|
-|**Enterprise Support**|Direct support from GitHub.|
-|**SAML/SCIM Authentication**|Centralizes identity and access management.|
-|**GitHub Connect**|Enables integration between Enterprise Cloud and Server.|
-|**Access Controls for GitHub Pages**|Restricts documentation visibility to internal collaborators.|
-
-##### Configuration Walkthrough
-
-###### Enable SAML SSO
-
-1. Connect your identity provider (IdP) to GitHub.
-2. In your organization settings, select **Require SAML authentication**.
-3. Provide your sign-on URL, issuer, and certificate.
-
-###### Restrict GitHub Pages Access
-
-1. Go to your private repository settings.
-2. Set **GitHub Pages visibility** to _Private_.
-3. Confirm no public URLs are accessible.
-
-###### Enable GitHub Connect
-
-1. Sign in to both GitHub Enterprise Server and GitHub.com.
-2. In Server settings, select **Enable GitHub Connect**.
-3. Choose organizations to link for unified search and contributions.
-
-#### Automation Features: Secure and Scalable Workflows
-
-Automation features help reduce human error, enforce coding standards, and streamline CI/CD.
-
-##### Core Automation Features
-
-|Feature|Description|
-|---|---|
-|**GitHub Advanced Security (GHAS)**|Scans code for vulnerabilities and secrets.|
-|**GitHub Actions Minutes**|Automate builds, tests, and deployments.|
-|**Automatic Security Updates**|Keeps dependencies secure and up-to-date.|
-
-##### Track Automation Usage
-
-###### GitHub Advanced Security (GHAS)
-
-1. Navigate to **Your enterprises > Settings**.
-2. Review user usage under **GitHub Advanced Security**.
-3. If nearing limits, evaluate usage by team and prioritize.
-
-![Screenshot of GHAS usage dashboard.](https://learn.microsoft.com/en-gb/training/github/github-administration-for-enterprise-support-adoption/media/enterprise-licensing-tab-ghas.png)
-
-###### GitHub Actions
-
-1. Navigate to **Your enterprises > Settings > Billing > GitHub Actions**.
-2. Monitor usage against your monthly 50,000 minutes and 50 GB storage.
-3. Note runner usage costs:
-    - Linux: baseline.
-    - Windows: 2x Linux rate.
-    - macOS: 10x Linux rate.
-
-![Screenshot of GitHub Actions minutes usage.](https://learn.microsoft.com/en-gb/training/github/github-administration-for-enterprise-support-adoption/media/actions-minutes.png)
-
-#### CI/CD Strategy in GitHub Enterprise
-
-GitHub Enterprise enables secure and scalable CI/CD practices using **GitHub Actions** and integrations with external tools.
-
-##### Key Capabilities
-
-- **GitHub Actions**: Define workflows in YAML to automate builds, tests, and deployments triggered by GitHub events (e.g., pushes, pull requests).
-- **Build Pipelines**: Automate code compilation, unit testing, artifact creation, and PR validation.
-- **Automated Testing**: Integrate unit, integration, and security tests to ensure quality before merge.
-- **Continuous Deployment (CD)**: Automatically release to staging or production with optional approvals.
-- **Toolchain Flexibility**: Support for Jenkins, CircleCI, Azure Pipelines, and more via webhooks and GitHub Marketplace apps.
-- **Release Automation**: Trigger tagged releases with changelogs and versioned artifacts from CI workflows.
-- **Security in CI/CD**: Integrate Dependabot, secret scanning, and compliance checks directly into pipelines.
-- **Monitoring & Notifications**: Configure alerts and integrate observability tools to track deployment health and performance.
-
->**Tip**: Define reusable workflows and environments (e.g., staging, production) to ensure consistency and control.
-
-##### Getting Started
-
-To automate deployment:
-
-1. Create a `.github/workflows/` directory in your repository.
-2. Define a CI/CD pipeline using GitHub Actions YAML (e.g., `ci-cd.yml`).
-3. Use secrets to manage credentials securely.
-4. Leverage environments and manual approvals for deployment gating.
-
-#### Monitoring Organizational Health
-
-Use insights to identify usage trends, collaboration patterns, and risk areas:
-
-##### Organization Activity Insights
-
-- View trends in pull requests, issues, and code languages.
-- Evaluate team distribution and developer engagement.
-
-##### Dependency Insights
-
-- Identify vulnerabilities in third-party dependencies.
-- Review license risks and assess security posture.
-
-#### Tooling: Extending GitHub Workflows
-
-Administrators can approve, configure, and maintain third-party tools and GitHub Marketplace integrations.
-
-##### Responsibilities
-
-- Approve apps at the org/repo level.
-- Monitor permission changes.
-- Prefer tools with **Verified Creator** badges for higher trust.
-
-![Screenshot of Verified Creator badge in GitHub Marketplace.](https://learn.microsoft.com/en-gb/training/github/github-administration-for-enterprise-support-adoption/media/apps-with-verified-publisher-badge-tooltip.png)
-
-##### Marketplace Guidelines
-
-|Category|Criteria|
-|---|---|
-|**CI/CD Tools**|Portable, dynamic, open standards-compliant tools for automation.|
-|**Verified Creators**|Require 2FA, verified domains, and GitHub partnership.|
-
-#### CI/CD Tools: What to Look For
-
-Choose tools that support continuous integration, delivery, or deployment with:
-
-- **Open standards**: Easy to adopt and train.
-- **Dynamic variables**: Centralized control for scaling workflows.
-- **Flexibility**: Adaptable across hybrid or cloud-native environments.
-
-### Support for GitHub Enterprise
-
-
-![A graphic that shows a stylized support engineer, with icons that represent different times of day](https://learn.microsoft.com/en-gb/training/github/github-administration-for-enterprise-support-adoption/media/premium-support.png)
-
-This unit explains the enhanced support options available with GitHub Enterprise and outlines key responsibilities of administrators when working with GitHub Support. You'll apply this knowledge whether you're using GitHub Enterprise Server (self-hosted) or GitHub Enterprise Cloud (hosted by GitHub).
-
-#### Support Availability
-
-|Availability|GitHub Enterprise Support|Premium & Premium Plus Support|
-|---|---|---|
-|Days of operation|Monday–Friday|Every day|
-|Initial response (High-level issues)|Within 8 hours|Within 4 hours|
-|Initial response (Urgent-level issues)|Within 8 hours|Within 30 minutes|
-
-[Premium and Premium Plus Support](https://github.com/premium-support) customers receive additional benefits, including priority handling and dedicated technical guidance.
-
-#### Distinguishing Administrator Duties from GitHub Support
-
-Knowing whether an issue should be handled internally or escalated to GitHub Support can reduce downtime and improve resolution time.
-
-|Issue|Solved by Administrator|Requires GitHub Support|
-|---|---|---|
-|Managing repository access|✅|❌|
-|Removing sensitive data from commits|✅|❌|
-|Restoring deleted branches|✅ (if recent)|❌|
-|Recovering deleted repositories|❌|✅ (within 90 days)|
-|Account recovery (lost access, compromised account)|❌|✅|
-|Billing & subscription issues|❌|✅|
-|Takedown requests (DMCA, copyright violations)|❌|✅|
-|Restoring force-pushed commits|❌|✅ (in limited cases)|
-|Clearing caches after history rewriting|❌|✅|
-
-#### Administrative Scope of Support
-
-GitHub Support typically assists with issues across three areas: accounts, security, and abuse. Your internal administrators handle tasks related to infrastructure, internal tools, or external authentication.
-
-- Account Issues: By verifying identity and restoring access, support helps resolve account access issues, such as lost two-factor authentication credentials.
-- Security Incidents: GitHub Support can help mitigate damage from compromised accounts, roll back repository changes, and assist with security recovery.
-- Abuse Cases: Support investigates violations of GitHub’s terms, such as harassment or inappropriate content, and can remove users or content as needed.
-
->**Note**: Administrators are responsible for infrastructure configuration, CI/CD integrations, third-party auth systems (like SAML), internal scripting, hardware setup, and immediate on-prem issue resolution.
-
-#### Creating and Prioritizing Support Tickets
-
-Use the [GitHub Support portal](https://support.github.com/) with a support-entitled account to submit tickets.
-
-Include the following:
-
-- Steps to reproduce the issue
-- Context (e.g., first occurrence, frequency, business impact)
-- Error messages (verbatim)
-
-##### GitHub Support Priority Levels
-
-|Priority|Description|Typical Response Time|
-|---|---|---|
-|🟢 Low|General inquiries, feature requests|24–48 hours|
-|🟡 Medium|Technical issues affecting users|12–24 hours|
-|🔴 High|Major bugs or service impact|Few hours|
-|🚨 Critical|Security, account lockout, billing|Immediate|
-
-#### Submitting Support Bundles and Diagnostics
-
-Support bundles and diagnostic files provide vital information about your GitHub Enterprise Server instance and are essential for effective troubleshooting.
-
-##### What’s Included in a Support Bundle?
-
-- Application logs
-- System diagnostics (CPU, memory, disk)
-- Configuration settings
-- Network errors and backups
-- Replication details (if applicable)
-
-##### Generating Support Bundles
-
-###### Using the Management Console
-
-1. Log in to **Management Console**.
-2. Go to **Support > Support Bundles**.
-3. Click **Create and Download Support Bundle**.  
-    _Download starts automatically once generated._
-
-###### Using the Command Line
-
-```bash
-ssh admin@your-ghes-instance
-ghe-support-bundle -o /path/to/directory/
-```
-
-Locate the `.tar.gz` file in the specified directory.
-
-#### Uploading Support Bundles Securely
-
-Once you've created a bundle:
-
-##### Option 1: Secure Upload Link (Recommended)
-
-1. Submit a ticket via the [Support Portal](https://support.github.com/) and indicate the need to share a bundle.
-2. GitHub Support will provide a one-time, secure upload link.
-
-##### Option 2: Alternative Methods
-
-- **Encrypted Email**: Encrypt bundle using 7-Zip or PGP; send file and password separately.
-- **Secure Cloud Storage**: Use services like Google Drive, OneDrive, or Dropbox with access restrictions.
-- **Physical Transfer**: For large bundles, GitHub may provide a mailing address.
-
-![Button to access Support area](https://learn.microsoft.com/en-gb/training/github/github-administration-for-enterprise-support-adoption/media/support-link.png)
-
-You can also upload support bundles from within the GitHub Enterprise UI:
-
-1. Select your enterprise under **Your Enterprises**.
-2. Go to **Settings > Enterprise Licensing**.
-3. Select **Upload a Support Bundle** in the **Help** section.
-
-#### Resolving and Closing Tickets
-
-GitHub Premium Support may mark tickets as solved after providing a fix, workaround, or recommendation.
-
-A ticket may be closed if:
-
-- It’s outside the scope of support.
-- Repeated follow-ups go unanswered.
-
-If your ticket is closed due to inactivity, you can request to reopen it.\
-
-### Scale your enterprise deployment
-
-As your GitHub Enterprise organization grows—whether due to team expansion or new contractor engagements—administrators are responsible for ensuring secure access, managing identity lifecycles, monitoring compliance, and optimizing deployment pipelines. This unit introduces key GitHub Enterprise features and governance tools to help you scale securely and efficiently.
-
-#### Secure Access with Single Sign-On (SSO)
-
-To maintain centralized identity control and streamline user management, enable SAML-based single sign-on (SSO) with your identity provider (IdP), such as Okta or Microsoft Entra ID.
-
->**Tip**: From your organization’s **People** tab, you can review and revoke individual SAML credentials under the **SAML identity linked** section.
-
->**Important**: If you use team synchronization, revoking a user’s SSO identity automatically removes them from any teams mapped to IdP groups.
-
-#### Automate Identity Management with SCIM and APIs
-
-Leverage GitHub APIs to automate user provisioning and deprovisioning, enforce security policies, and monitor access across your enterprise.
-
-##### Use the SCIM API for Lifecycle Automation
-
-The SCIM standard streamlines identity workflows through RESTful JSON requests. It is supported by:
-
-- Microsoft Entra ID
-- Okta
-- OneLogin
-
-This allows automatic updates to user access without manual intervention, reducing risk and improving efficiency.
-
-##### Responsible API Usage
-
-Avoid inefficient polling patterns. Use webhooks, GitHub Apps, or GitHub Actions to trigger automation. When using the Audit Log API:
-
-```bash
-curl -H "Authorization: Bearer YOUR_TOKEN" \
-https://api.github.com/enterprises/YOUR_ENTERPRISE/audit-log
-```
-
-Store logs in external SIEM systems like Splunk or ELK for long-term retention and compliance reporting.
-
-#### Monitor Compliance with Enterprise Audit and GraphQL APIs
-
-Use the Enterprise Accounts API and Audit Log API (GraphQL only) to track sensitive changes:
-
-- Repository or settings access
-- User or role changes
-- App permission updates
-
-GraphQL enables you to fetch only the data you need or mutate enterprise settings programmatically.
-
-#### Simplify Team Management with Enterprise Teams (Preview)
-
-**Enterprise Teams** allow centralized team creation and management across multiple organizations.
-
-##### Setup Overview:
-
-|Platform|Steps|
-|---|---|
-|**Enterprise Cloud**|Navigate to **Organization Settings** → **Teams**, then create or manage team memberships.|
-|**Enterprise Server**|Use the **Management Console** to configure teams and assign permissions at the org level.|
-
-**Benefits:**
-
-- Centralize role assignment across organizations
-- Improve visibility into team structure and contributions
-- Standardize access control at scale
-
-#### Control App Governance with Enterprise Apps (Preview)
-
-Enterprise Apps enhance oversight and control over GitHub Apps installed across your organizations.
-
-##### Setup Overview
-
-|Platform|Steps|
-|---|---|
-|**Enterprise Cloud**|Go to **Developer settings** → **GitHub Apps**, install or create custom apps, and configure permissions.|
-|**Enterprise Server**|Use the **Management Console** to create and manage GitHub Apps with custom scopes and webhook settings.|
-
-**Benefits:**
-
-- Centralized app management
-- Simplified app deployment and access control
-- Visibility into app usage and permissions across all orgs
-
-#### Extend Capabilities with GitHub Marketplace Tools
-
-![A screenshot of the GitHub marketplace interface](https://learn.microsoft.com/en-gb/training/github/github-administration-for-enterprise-support-adoption/media/marketplace-interface.png)
-
-The [GitHub Marketplace](https://github.com/marketplace) offers reusable automation tools that simplify CI/CD, enhance collaboration, and extend GitHub functionality at scale. These tools include **GitHub Actions** and **GitHub Apps**—two core integration types with different scopes, lifecycles, and use cases.
-
-##### Choosing Between Actions and Apps
-
-|Feature|GitHub Actions|GitHub Apps|
-|---|---|---|
-|**Use case**|Automate workflows (CI/CD, linting, etc.)|Extend GitHub via APIs, UI, and permissions|
-|**Execution**|Per-trigger on GitHub-hosted/self-hosted runners|Runs as a service; responds to webhook events|
-|**Auth Model**|Uses temporary `GITHUB_TOKEN`|Uses JWT + installation token|
-|**Billing**|Billed per Action minute|SaaS-based (subscription/licensing)|
-
->**Tip**: Use GitHub Actions for ephemeral, event-based automation. Choose GitHub Apps when building persistent services with deeper API interactions or advanced permission scopes.
-
-##### How Marketplace Tools Work Under the Hood
-
-Understanding how these tools interact with GitHub helps you make informed decisions and troubleshoot more effectively.
-
-###### GitHub Actions Workflow
-
-1. **Setup**: Define a YAML workflow in `.github/workflows/`.
-2. **Trigger**: A GitHub event (e.g., `push`) initiates the workflow.
-3. **Runner**: GitHub spins up a runner (cloud or self-hosted).
-4. **Execution**: Steps run commands, use Actions, and access the `GITHUB_TOKEN`.
-5. **Results**: Logs and statuses are pushed back to GitHub.
-
-**Flow:**  
-`Repository Event → Workflow Triggered → Runner Executes Jobs → Output Returned to GitHub`
-
-###### GitHub Apps Workflow
-
-1. **Setup**: App is installed with specific repo/org-level permissions.
-2. **Webhooks**: GitHub sends events (e.g., `issues.opened`) to the app’s server.
-3. **Authentication**: The app uses its private key + installation token to authenticate.
-4. **Interaction**: The app makes API calls to act on the repository (e.g., add a label, comment).
-
-**Flow:**  
-`Repository Event → Webhook Sent → App Server Receives → Authenticates → GitHub API Call → Action Taken`
-
-##### Practical Examples
-
-###### GitHub App: Azure Pipelines
-
-**Use Case:** Automate deployment pipelines across environments.
-
-**Steps:**
-
-1. Find [Azure Pipelines](https://github.com/marketplace/azure-pipelines) in the Marketplace.
-2. Install the app and grant repository access.
-3. Configure a pipeline:
-
-```yaml
-trigger:
-  - main
-pool:
-  vmImage: 'ubuntu-latest'
-steps:
-  - script: echo "Deploying via Azure Pipelines"
-```
-
-###### GitHub Action: Node.js CI/CD
-
-**Use Case:** Automate build and test for a Node.js project.
-
-**Steps:**
-
-1. Create `.github/workflows/nodejs.yml`:
-
-```yaml
-name: Node.js CI/CD
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - run: npm install && npm test
-```
-
-##### Marketplace Search Tips
-
-- **Determine Tool Type:** Use **Apps** for broad capabilities; **Actions** for task-specific automation.
-- **Set Budget Preferences:** Filter by **Free**, **Free Trial**, or **Paid** apps.
-- **Refine by Category:** Choose a category like **CI/CD** to match your project goals.
-- **Focus on Enterprise Support:** Use the **GitHub Enterprise** filter for tailored tools.
-
-### GitHub Enterprise Managed Users
-
-Here, you explore the capabilities of centrally managing your GitHub enterprise members through GitHub Enterprise Managed Users.
-
-GitHub Enterprise Managed Users (EMUs) are GitHub Enterprise Cloud accounts owned by companies and not individual users. The company’s GitHub administrators, control, manage, and audit these accounts. Using EMUs, you can connect your GitHub Enterprise Account to an identity provider (IdP); either Microsoft Entra ID or Okta. From there, you're able to centrally manage the user provisioning lifecycle and create a true single sign-on experience for your members and contractors. To ensure everything works smoothly, Admins have complete jurisdiction over the EMU accounts and their corresponding private repositories.
-
-Because the company owns these EMU accounts, an administrator of the company can grant EMU access to any organization within the enterprise. In addition, you can control the profile information of your EMUs, including usernames, display names, and emails, all from your connected IdP. In short, With an EMU account, you can reduce the number of tasks that need to be manually duplicated from your IdP on GitHub.
-
-Once provisioning is enabled in your IdP, you're able to accomplish the following tasks.
-
-- Managing team membership and repository access.
-- Controlling profile and personal data.
-- Provisioning, updating, and deprovisioning IdP security groups to team and user memberships in GitHub EMU.
-- Simplifying authentication with single sign-on (SSO).
-
-![screenshot of the enterprise managed user sso](https://learn.microsoft.com/en-gb/training/github/github-administration-for-enterprise-support-adoption/media/emu-sso-example.png)
-
-##### Access of managed users within your enterprise
-
-In addition to what we mentioned about EMU access, permissions, and restrictions. Here's a high-level overview of the differences between managed users and regular users within GitHub Enterprise.
-
-||GitHub Enterprise Managed Users (EMU)|GitHub Enterprise Account|
-|---|---|---|
-|Ownership|Created for and controlled by the identity provider.|Multiple authorization and authentication initiatives required in GitHub to ensure secure enterprise access.|
-|Membership|Automated user provisioning syncs IdP group membership with GitHub teams.|Administrators manage user membership on teams in the enterprise's organizations on GitHub.|
-|Policies|You can create policies at the enterprise level that apply to all users on the account.|Users are required to confirm compliance with GitHub user policies.|
-|Audit log|Enterprise owners can audit all of the managed users' actions on GitHub.com|Only audit log activity that happens in the enterprise account is available for your review.|
-|Privacy|No public repositories on EMU-enabled enterprises.|Enterprise users can create public repositories.|
-|SSO|True single sign-on experience for your users.|Multiple authentication steps required for your users to sign on.|
-|Metadata|The enterprise controls user GitHub metadata. Managed users can't modify it. This metadata includes email addresses, display names, and usernames.|Enterprise users create their own account, provide email, and choose their GitHub handle.|
-
-##### Authentication and user provisioning
-
-With managed users, you provision user accounts for your enterprise's members on GitHub.com directly from your IdP. To access resources in your enterprise, all members must authenticate to GitHub.com solely through your IdP.
-
-To manage identity and access for your enterprise, you need to configure an application on your IdP and your enterprise on GitHub.com. Authentication requires Security Assertion Markup Language (SAML) SSO and user provisioning requires System for Cross-domain Identity Management (SCIM). After you complete the configuration, your IdP communicates with GitHub.com each time you make the following changes.
-
-- Assigning an application to a user on your IdP. Your IdP creates a user account as a member of your enterprise on GitHub.com and sends a notification email to the user.
-- Updating information associated with a user's identity on your IdP. Your IdP updates the user's account on GitHub.com.
-- Unassigning the application from a user or deactivating a user's account on your IdP. Your IdP communicates with GitHub.com to invalidate any SAML sessions and disable the member's account.
-
-##### Other use cases for EMU accounts
-
-There are several unique ways you can use EMU accounts within your organization, let's look at some common use cases for EMUs found within most companies.
-
-###### Onboard new employees
-
-Employees are constantly joining the company all across the organization, departments, and teams. As an administrator, you can provision an EMU account for a new employee with all of their required permissions in the morning of their first day. EMU accounts also allow you to assign a GitHub handle that matches their work email to make identification easy across all systems. All of this setup occurs within the IdP and not within GitHub. The benefit of this configuration is to configure these settings in the same automatic flow as their benefits, HR, and expense systems to create a fast, efficient, and consistent onboarding.
-
-###### Off board employees
-
-On the contrary to onboarding, when an employee leaves the company, an administrator can instantly suspend their GitHub account with the same flow used to turn off the rest of their work access and systems. This turn-off includes HR, email, internal documents, and benefits. Since the IdP governs EMUs, the setup creates an efficient, fast, and secure method to remove access to sensitive source code when an employee leaves the company. This automatic turn-off prevents any lingering GitHub access.
-
-###### Reduce accidental IP leakage
-
-With the rise of open-source software contributions, employees might need to switch between projects with different user identities and permissions throughout the day. This situation leads to the possibility of accidental IP (Intellectual Property) leakage and contributions made to a project using the wrong credentials. EMUs reduce this risk by clearly identifying the current account and ensuring that the employee can't accidentally expose IP to personal or open-source repositories. This setup secures the company, IP, and the employee from accidental leakage.
-
-###### Consultant administration
-
-Similar to granting access to new employees with an EMU account, consultants can be granted access to an EMU account through the company's IdP. When their project is finished, they lose access to GitHub using the same flow that they would lose access to everything else. This automatic removal prevents lingering access for days or even weeks after their contract expires. In addition, if the consultant is working with multiple clients at the same time, by using an EMU account the consultant can't accidentally leak the company's IP into the other clients' repositories. This setup allows for tight control over access to the company's source code and IP while reducing lingering access or accidental IP leakage.
-
-## Manage GitHub Actions in the enterprise
 ### Introduction
 
-![Image of the GitHub Enterprise logo.](https://learn.microsoft.com/en-gb/training/github/manage-github-actions-enterprise/media/github-enterprise-logo.png)
+GitHub projects support virtually unlimited scale. The upside of this scale is that your projects can grow to include countless files, commits, issues, pull requests, and more. The downside is, well, the same.
 
-GitHub Actions are quickly becoming a core feature to DevOps in many organizations. This enables developers to automate, customize, and execute their software development workflows right within their GitHub repository.
+Suppose you're a developer working on a rapidly growing project. As more contributors come on board, they're able to add features and fix bugs at an incredible rate. However, every one of those changes likely includes a lot of contextual information buried in issues, discussions, commits, and pull requests. While that information seems fresh in everyone's mind at the time, the risk of losing that context as time passes could cost you some significant productivity down the road. What happens when a bug is reported that traces back to work that hasn't been touched for more than a year? Fortunately, GitHub offers a few ways to help you quickly ramp up for any task.
 
-Suppose your organization is already using GitHub Actions and, as it's scaling up operations, decides to upgrade its GitHub instance to GitHub Enterprise Cloud or Enterprise Server. Your CIO asks you to evaluate how the development teams in your organization currently use GitHub Actions to take full advantage of all the features available in GitHub Enterprise. You also need to establish a plan to optimize the use of actions and workflows currently in place. But first, you really need to understand what GitHub Actions options are available to you in your enterprise instance.
-### Understanding GitHub enterprise models
+### How to search and organize repository history by using GitHub
 
-#### How users are managed
+Here, we'll discuss how you can use filters, blame, and cross-linking to search and organize repository history.
 
-GitHub Enterprise Cloud (GHEC) is a cloud-based solution tailored for organizations that need the flexibility and scalability of GitHub's infrastructure while maintaining enterprise-grade security and compliance. It offers features such as centralized user management, data residency options, and integration with identity providers like SAML and SCIM for single sign-on and user provisioning.
+Put yourself in the position of a developer who has just joined a large project. Someone just posted a new issue reporting a bug related to the web app's sidebar, and you've been assigned to fix it. You've already read through the report a few times and understand the problem being described, so now you need to figure out how to get started with the fix.
 
-GHEC is ideal for globally distributed teams, as it ensures high availability, automated backups, and seamless access to GitHub’s robust collaboration tools. It supports regulatory compliance and provides detailed audit logs for governance. With GHEC, organizations can leverage GitHub’s advanced capabilities without managing on-premises infrastructure.
+As a new team member, you're not yet familiar with the codebase. You also haven't been part of the planning discussions, code reviews, or anything else that would provide you with the context you need to start implementation. You'll first need to acquire that background knowledge to best determine the right fix.
 
-##### Standard User Model
+#### Searching GitHub
 
-This is the traditional user model on GitHub, where users manage their own account.
+Although you weren't around for the events that led to the sidebar's implementation, many of those events live on in the project's history. Searching the project's repository for "sidebar" will give you a starting point.
 
-**Characteristics of standard user model**:
+There are two search methods available on GitHub: the global search at the top of the page and the scoped search available on certain repository tabs. They support the same syntax and function in the same way, but with some key differences.
 
-- Users manage their accounts, including usernames, email addresses, and personal settings.
-- Authentication methods are configured by users (e.g., OAuth, password).
-- The connection to organizations or enterprise accounts is established through invitations.
-- Admins have limited control over user accounts once they are connected to an enterprise organization.
-- Often used in smaller-scale enterprises or organizations without strict centralized management needs.
+##### Global search
 
-##### The Enterprise Managed User (EMU) model
+The global search lets you use [the complete search syntax](https://docs.github.com/enterprise-cloud@latest/search-github/searching-on-github) to search across all of GitHub.
 
-This is the model designed for organizations requiring centralized user account management, offering better control and compliance features.
+![A screenshot of a search across GitHub.](https://learn.microsoft.com/en-us/training/github/search-organize-repository-history-github/media/2-global-search.png)
 
-**In EMU model**:
+The search results are comprehensive and include everything from code to issues to the Marketplace (and even users). This is the best way to find mentions of key terms across multiple result types and repositories.
 
-- User accounts are fully managed by the enterprise.
-- Authentication is handled through the enterprise’s identity provider (e.g., SAML, SCIM).
-- Admins have control over usernames, email addresses, and user lifecycle (creation, deactivation).
-- Managed users can only join the enterprise they belong to and cannot independently join other organizations.
-- Often used by larger enterprises or organizations requiring compliance with stricter governance policies.
+![A screenshot of global search results.](https://learn.microsoft.com/en-us/training/github/search-organize-repository-history-github/media/2-global-search-results.png)
 
-##### GitHub Enterprise Cloud (GHEC) with **Data Residency**
+>**Note**: The filter clause `is:pr` filters out issues returned from the issues/pull requests store. Some filter clauses, such as `is:pr`, are only supported by certain search providers and ignored by others. For example, the code-search provider doesn't support that clause, so it will ignore it and return the same code results either way.
 
-GitHub Enterprise Cloud (GHEC) with **Data Residency** is an important feature of GHEC for organizations that must comply with data protection regulations by ensuring specific data is stored in particular geographical regions.
+In our scenario, using the global search scoped to the current repository is a good way to find code and commits that mention the term "sidebar". You'll also likely get hits for issues and pull requests, although they're not as easy to filter further in the global search results view.
 
-**It allows users to**:
+To craft a complex global search, try the [advanced search](https://github.com/search/advanced).
 
-1. **Data Residency Regions**:
-    
-    - GitHub provides predefined regions (e.g., the United States, Europe) based on your compliance needs.
-2. **Data Types Covered**:
-    
-    - **Repository Contents**: Code, issues, pull requests, and repository-related data.
-    - **Metadata**: Includes audit logs, user events, and settings.
-3. **Encryption and Security**:
-    
-    - All data in transit and at rest is encrypted.
-    - Compliance with regional and global security standards (e.g., ISO 27001, SOC 2).
-4. **Regional Storage and Failover**:
-    
-    - Data is stored in the selected region with high availability and disaster recovery mechanisms.
-    - Certain types of backup data may be replicated outside the region but remain encrypted.
+##### Context search
 
-#### GitHub Enterprise Server (GHES)
+Context searches are available on certain tabs, such as **Issues** and **Pull requests**. These searches are scoped into the current repository and only return results of that type. The benefit to this scoping is that it allows the user interface to expose known type-specific filters such as authors, labels, projects, and more.
 
-GitHub Enterprise Server (GHES) is a self-hosted version of GitHub designed for organizations that require complete control over their GitHub instance. It is ideal for companies that want to host their repositories and associated data on-premises or in a private cloud environment for compliance, security, or performance reasons.
+![Screenshot of a context search within a repository.](https://learn.microsoft.com/en-us/training/github/search-organize-repository-history-github/media/2-context-search.png)
 
-##### Key Features of GitHub Enterprise Server
+Using the context search is the preferred option when you're looking for something in the current repository. In our scenario, this is a good way to find search results mentioning "sidebar," which you could then easily refine using the filter dropdowns.
 
-1. **Self-Hosting**:
-    - GHES is deployed within the organization’s infrastructure, either on-premises or on a private cloud.
-    - Provides full control over data storage, backups, and disaster recovery.
-2. **Enhanced Security**:
-    - Data remains within the organization's environment, ensuring compliance with strict data residency, privacy, or security requirements.
-    - Integrates with enterprise authentication systems (e.g., LDAP, SAML, Active Directory).
-3. **Customization and Control**:
-    - Full control over repository settings, user access, and permissions.
-    - Allows custom integrations and extensions, such as internal DevOps tools or CI/CD pipelines.
-4. **Performance Optimization**:
-    - Optimized for organizations with large repositories or distributed teams.
-    - Can be scaled to handle heavy workloads by allocating additional resources (e.g., CPU, RAM).
-5. **Compliance**:
-    - Ideal for industries with strict regulatory requirements (e.g., healthcare, finance).
-    - Offers audit logs, user activity monitoring, and data encryption to meet compliance standards.
+##### Using search filters
 
-##### Components of GHES
+There are an infinite number of ways to search using [the complete search syntax](https://docs.github.com/enterprise-cloud@latest/search-github/searching-on-github). However, most searches only make use of a few common filters. While these are often available from context search dropdowns, it's sometimes more convenient to type them in directly.
 
-1. **GitHub Application**:
-    - The interface and core functionality (e.g., repositories, pull requests, issues) are similar to GitHub.com.
-2. **Administrative Dashboard**:
-    - Provides tools for managing users, teams, and organizations.
-    - Includes settings for repository access, backups, and updates.
-3. **System Administration Tools**:
-    - Tools for managing server configuration, resource allocation, and performance monitoring.
-4. **Backup and Disaster Recovery**:
-    - Features for creating and restoring backups to prevent data loss.
-5. **Monitoring and Logging**:
-    - Built-in monitoring tools like Prometheus and Grafana for server health.
-    - Logs for troubleshooting and auditing.
+Here are some example filter queries:
+
+|Query|Explanation|
+|---|---|
+|`is:open is:issue assignee:@me`|Open issues assigned to the current user (`@me`)|
+|`is:closed is:pr author:contoso`|Closed pull requests created by `@contoso`|
+|`is:pr sidebar in:comments`|Pull requests where "sidebar" is mentioned in the comments|
+|`is:open is:issue label:bug -linked:pr`|Open issues labeled as bugs that do not have a linked pull request|
+
+Learn more about [Understanding the search syntax](https://docs.github.com/enterprise-cloud@latest/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax)
+
+#### What is git blame?
+
+Despite its ominous name, `git blame` is a command that displays the commit history for a file. It makes it easy for you to see who made what changes and when. This makes it much easier to track down other people who have worked on a file in order to seek out their input or participation.
+
+>**Note**: Some Git systems alias `git praise` onto `git blame` to avoid the implication of judgment.
+
+##### Blame in GitHub
+
+GitHub extends the basic `git blame` functionality with a more robust user interface.
+
+![A screenshot of GitHub blame.](https://learn.microsoft.com/en-us/training/github/search-organize-repository-history-github/media/2-github-blame.png)
+
+In our scenario, there are a few ways you might get to this view. You might've found some sidebar code from the global search and selected the **Blame** option to see who worked on it last, or maybe you found a pull request and tracked that back to the last commit that seems related to the bug description. However you got here, the blame view is an effective way to locate a subject matter expert for the task at hand.
+
+#### Cross-linking issues, commits, and more
+
+Part of what makes GitHub great for collaborative software projects is its support for linking disparate pieces of information together. Some of this happens automatically, such as when you create a pull request from a series of commits on a branch. Other times, you can use the interface to manually link pull requests or projects to issues using the dropdown options.
+
+##### Autolinked references
+
+To make it even easier to cross-link different items throughout your project, GitHub offers a shorthand syntax. For example, if you leave a comment like `Duplicate of #8`, GitHub will recognize that #8 is an issue and create the appropriate link for you.
+
+![Screenshot of an autolinked issue.](https://learn.microsoft.com/en-us/training/github/search-organize-repository-history-github/media/2-autolinked-issue.png)
+
+GitHub also links commits for you if you paste in the first seven or more characters of its ID.
+
+![Screenshot of an autolinked commit.](https://learn.microsoft.com/en-us/training/github/search-organize-repository-history-github/media/2-autolinked-commit.png)
+
+In our scenario, these links could prove very valuable for ramping up if someone thought ahead to leave the context. For example, the sidebar's current state might have had some known issues related to a JavaScript dependency. If the issue with that dependency was discussed in another issue that didn't explicitly mention "sidebar," then it would be difficult to find. However, if someone had thought ahead to link the issue in the discussion, then it could save you a lot of time now. Keep that in mind the next time you're documenting issues and pull requests.
+
+Learn more about [Autolinked references and URLs](https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls).
+
+##### Looping in users with @mention
+
+Besides linking issues and commits, it's often helpful to associate other people with discussions. The easiest way to do this is by using an `@mention`. This kind of mention notifies the mentioned user so that they can participate in the discussion. It's also a good way to identify people associated with issues long after they have been closed.
+
+![Screenshot of an @ mention.](https://learn.microsoft.com/en-us/training/github/search-organize-repository-history-github/media/2-user-mention.png)
+## Using GitHub Copilot with Python
+### Introduction
+
+GitHub Copilot is an AI coding partner that provides autocomplete suggestions while you code. You get suggestions from Copilot by typing code or describing it in natural language.
+
+Copilot analyses your file and related files, offering suggestions in your text editor. It uses OpenAI Codex, a new AI system developed by OpenAI, to help derive context from written code and comments, and then suggests new lines or entire functions.
+
+GitHub Codespaces is a hosted developer environment operating in the cloud that can be run with Visual Studio Code. You can customize the development experience for any development project on GitHub, preinstalling dependencies, libraries, and even Visual Studio Code extensions and settings.
+### What is GitHub Copilot?
+
+Often, when you write code, you need to consult official documentation or other web pages to remember syntax or how to solve a problem. You can also spend hours trying to resolve a problem when the code isn't working. Additionally, you also spend time writing tests and documentation. All these tasks are time consuming. To be more efficient, you could use code snippets or rely on tooling in your integrated development environment (IDE). But is there a better way?
+
+#### How does it work?
+
+GitHub Copilot is an AI assistant that you use from within your IDE that’s capable of generating code and much more. GitHub Copilot uses _prompts_. A prompt is natural language text that you type. Copilot uses the text to provide suggestions based on what you type.
+
+A prompt can look like the following example:
+
+```python
+# Create a web API using FastAPI with a route to products.
+```
+
+Copilot then uses the prompt to generate a response that you can choose to accept or reject. A response to the prompt might look like the following code:
+
+```python
+from fastapi import FastAPI
+app = FastAPI()
+
+@app.get("/products")
+def read_products():
+    return []
+```
+
+#### How it recognizes prompts
+
+Copilot can tell that something is a prompt or an instruction if you:
+
+- Type it as a comment in a code file with a file ending like .py or .js.
+- Type text in a markdown file and wait a few seconds for Copilot to return a response.
+
+#### Accepting suggestions
+
+What you get back from Copilot is a _suggestion_, or text that shows itself as gray code, if you use black as your text color. To accept the suggestion, you need to press the Tab key.
+
+Copilot might suggest more than one thing. In this case, you can cycle between suggestions by using Ctrl + Enter, and select the most appropriate one.
+
+### Use GitHub Copilot with Python
+
+#### Developing with GitHub Copilot
+
+Often when we build out projects, we need to continuously ensure our code is fresh and updated. Additionally, we might need to fix any bugs that come up or add new features to improve functionality and usability. Let's explore some ways to make updates with GitHub Copilot and GitHub Copilot Chat, an interactive chat interface that lets you ask and receive answers to code-related questions.
+
+##### Prompt engineering
+
+GitHub Copilot can suggest code as you enter it, but you can also create useful suggestions by building prompts. A prompt, which is our input, is a collection of instructions or guidelines that help generate code. A prompt is useful to generate specific responses from Copilot. The prompt might be a comment or input when using GitHub Copilot Chat that steers Copilot to generate code on your behalf or writing code that Copilot autocompletes.
+
+The quality of output from Copilot depends on how well you craft your prompt. Designing an effective prompt is crucial to ensuring you achieve your desired outcome.
+
+For example, consider the following prompt:
+
+```python
+# Create an API endpoint
+```
+
+The prompt is ambiguous and vague, so the result from GitHub Copilot might not be what you need. It could, for example, suggest code that uses a framework that you don't know, or an endpoint that requires data that you don't recognize.
+
+Now consider this prompt:
+
+```python
+# Create an API endpoint using the FastAPI framework that accepts a JSON payload in a POST request
+```
+
+The prompt is specific, clear, and allows GitHub Copilot to understand the goal and scope of the task. You can provide context and examples to Copilot using comments or code, but you can also use the chat option of GitHub Copilot Chat to enhance your prompt. Having a good prompt ensures that the model generates a high-quality output.
+
+##### Best practices using GitHub Copilot
+
+Copilot supercharges your productivity but requires some good practices to ensure quality. Some best practices when using Copilot are:
+
+Keep your prompts simple then add more elaborate components as you keep going. For example:
+
+```
+create an HTML form with a text field and button
+```
+
+Next, elaborate more on the prompt to get more specific suggestions:
+
+```
+Add an event listen to the button to send a POST request to /generate endpoint and display response in a div with id "result"
+```
+
+Cycle between suggestions. You can do this using `Ctrl+Enter` (or `Cmd+Enter` on a Mac). You get various suggestions from Copilot, and you can pick the best output. Optionally, when using GitHub Copilot Chat, you can use the chat input to add your prompt and interact with the output.
+
+If you're not getting the results you want, then you can reword the prompt or start writing code for Copilot to autocomplete.
+
+>**Note**: GitHub Copilot uses open files in your text editor as additional context. This is helpful because it provides useful information in addition to the prompt or code you may be writing. If you need GitHub Copilot to provide suggestions based on other files you can open those or use `@workspace` with your prompt when using GitHub Copilot Chat.
